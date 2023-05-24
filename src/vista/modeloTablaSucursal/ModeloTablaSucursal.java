@@ -4,7 +4,13 @@
  */
 package vista.modeloTablaSucursal;
 
+import controlador.ed.cola.Cola;
+import controlador.ed.cola.ColaI;
+import controlador.ed.lista.exception.PosicionException;
+import controlador.ed.lista.exception.VacioException;
 import controlador.util.Utilidades;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import modelo.Sucursal;
 
@@ -14,14 +20,22 @@ import modelo.Sucursal;
  */
 public class ModeloTablaSucursal extends AbstractTableModel {
 
-    private Sucursal[] datos = new Sucursal[4];
+    //private Sucursal[] datos = new Sucursal[4];
+    private ColaI<Sucursal> cola = new ColaI<>(4);
 
-    public Sucursal[] getDatos() {
+    /*public Sucursal[] getDatos() {
         return datos;
     }
 
-    public void setDatos(Sucursal[] datos) {
-        this.datos = datos;
+    public void setCola(Sucursal[] datos) {
+        this.cola = cola;
+    }*/
+    public ColaI<Sucursal> getColaI() {
+        return cola;
+    }
+
+    public void setColaI(ColaI<Sucursal> cola) {
+        this.cola = cola;
     }
 
     @Override
@@ -32,12 +46,19 @@ public class ModeloTablaSucursal extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return datos.length;
+        return cola.size();
     }
 
     @Override
     public Object getValueAt(int i, int i1) {
-        Sucursal s = datos[i];
+        //Sucursal s = null;
+        try {
+            
+            if (cola.isEmpty()) {
+            return "009";
+            }
+           Sucursal s = cola.get(i);
+        
         switch (i1) {
             case 0:
                 return (s != null) ? s.getNombre() : "NO DEFINIDO";
@@ -46,8 +67,12 @@ public class ModeloTablaSucursal extends AbstractTableModel {
             case 2:
                 return (s != null) ? Utilidades.mediaVentas(s) : 0.0;
             default:
-                return null;
+                return "-0-";
         }
+        } catch (VacioException | PosicionException ex) {
+return "----";
+        }
+
     }
 
     @Override

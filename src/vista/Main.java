@@ -4,9 +4,11 @@
  */
 package vista;
 
+import controlador.ed.cola.Cola;
 import controlador.ed.lista.ListaEnlazada;
 import controlador.ed.lista.exception.PosicionException;
 import controlador.ed.lista.exception.VacioException;
+import controlador.ed.pila.Pila;
 import modelo.Sucursal;
 
 /**
@@ -16,7 +18,18 @@ import modelo.Sucursal;
 public class Main {
 
     public static void main(String[] args) {
-
+        Pila<Integer> pila= new Pila(5);
+          Cola<Integer> cola= new Cola(5);
+        try {
+            pila.push(5);
+            pila.push(56);
+            pila.push(5);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+}
+/*
             ListaEnlazada<Sucursal> lista= new ListaEnlazada<>();
             try {
                  Sucursal s1 = new Sucursal();
@@ -37,4 +50,6 @@ public class Main {
                 System.out.println(ex.getMessage());
     }
     }
-}
+
+    }
+*/

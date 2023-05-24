@@ -38,10 +38,9 @@ public class Sucursal {
         this.ventas = ventas;
     }
 
-    
     @Override
-    public String toString(){
-        return nombre+""+id;
+    public String toString() {
+        return nombre + "" + id;
     }
 
 }

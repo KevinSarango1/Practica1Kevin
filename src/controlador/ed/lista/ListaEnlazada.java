@@ -10,6 +10,7 @@ import controlador.ed.lista.exception.VacioException;
 /**
  *
  * @author Kevin
+ * @param <E>
  */
 public class ListaEnlazada<E> {
 

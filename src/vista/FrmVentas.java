@@ -6,8 +6,10 @@ package vista;
 
 import controlador.SucursalControl;
 import controlador.exception.EspacioException;
+import controlador.util.Utilidades;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Venta;
 import vista.modeloTablaSucursal.ModeloTablaVenta;
 
 /**
@@ -27,7 +29,7 @@ public class FrmVentas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.control = sc;
-        lblSucursal.setText(sc.getSucursal().getNombre());
+        lblSucursal.setText(sc.getSucursales().getNombre());
         cargarTabla();
     }
 
@@ -36,7 +38,7 @@ public class FrmVentas extends javax.swing.JDialog {
     }
 
     private void cargarTabla() {
-        modelo.setVenta(control.getSucursal().getVentas());
+        modelo.setVenta(control.getSucursales().getVentas());
         tblTabla.setModel(modelo);
         tblTabla.updateUI();
     }
@@ -51,12 +53,14 @@ public class FrmVentas extends javax.swing.JDialog {
     private void cargarVenta() {
         fila = tblTabla.getSelectedRow();
         if (fila >= 0) {
-            control.setVenta(this.control.getSucursal().getVentas()[fila]);
+            control.setVenta(this.control.getSucursales().getVentas()[fila]);
             txtValor.setText(this.control.getVenta().getValor().toString());
             lblMes.setText(this.control.getVenta().getMes().toString());
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una sucursal", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+       
     }
 
     private void modificar() {
@@ -65,7 +69,7 @@ public class FrmVentas extends javax.swing.JDialog {
             try {
                 this.control.guardarVentas(fila, Double.parseDouble(txtValor.getText()));
                 this.limpiar();
-                JOptionPane.showMessageDialog(null, "Se Ha actualizado", "OK", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se Ha actualizado", "OK", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (EspacioException ex) {
                 JOptionPane.showMessageDialog(null, "Seleccione una venta de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
@@ -97,6 +101,8 @@ public class FrmVentas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
         btnSeleccionar = new javax.swing.JButton();
+        btn_calcularMa_Me = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,25 +182,35 @@ public class FrmVentas extends javax.swing.JDialog {
             }
         });
 
+        btn_calcularMa_Me.setText("Calcular Menor Mayor");
+        btn_calcularMa_Me.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_calcularMa_MeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_calcularMa_Me))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSeleccionar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionar)
+                    .addComponent(btn_calcularMa_Me))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
 
@@ -226,13 +242,26 @@ public class FrmVentas extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 529, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -240,7 +269,9 @@ public class FrmVentas extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,6 +284,10 @@ public class FrmVentas extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         modificar();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btn_calcularMa_MeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularMa_MeActionPerformed
+       Utilidades.ordenarVentas_obtenerMAYOR_MENOR(control.getSucursales());
+    }//GEN-LAST:event_btn_calcularMa_MeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +316,8 @@ public class FrmVentas extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -300,12 +337,14 @@ public class FrmVentas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btn_calcularMa_Me;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMes;
     private javax.swing.JLabel lblSucursal;

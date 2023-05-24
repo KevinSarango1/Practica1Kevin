@@ -5,8 +5,16 @@
 package vista;
 
 import controlador.SucursalControl;
+import controlador.ed.lista.exception.PosicionException;
+import controlador.ed.lista.exception.VacioException;
 import controlador.exception.EspacioException;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import vista.modeloTablaSucursal.ModeloTablaSucursal;
 
 /**
@@ -25,18 +33,18 @@ private ModeloTablaSucursal modelo= new ModeloTablaSucursal();
         cargarTabla();
     }
 private void cargarTabla(){
-        modelo.setDatos(control.getSucursales());
+        modelo.setColaI(control.getColaI());
         tblTabla.setModel(modelo);
         tblTabla.updateUI();
                 }
 private void limpiar(){
-    this.control.setSucursal(null);
+    this.control.setSucursales(null);
             txtNombre.setText("");
             cargarTabla();
 }
 private void guardarSucursal(){
     if(!txtNombre.getText().trim().isEmpty()){
-            control.getSucursal().setNombre(txtNombre.getText());
+            control.getSucursales().setNombre(txtNombre.getText());
             try {
                 control.registrar();
                 limpiar();
@@ -66,6 +74,9 @@ private void guardarSucursal(){
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
         Ventas = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        labelTest = new javax.swing.JLabel();
+        btnReclamos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -122,10 +133,46 @@ private void guardarSucursal(){
         Ventas.setBounds(490, 140, 72, 23);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 140, 560, 280);
+        jPanel3.setBounds(10, 140, 560, 240);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 10, 580, 390);
+
+        labelTest.setText("Texto de prueba dentro de reclamos");
+
+        btnReclamos.setText("Reclamos");
+        btnReclamos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReclamosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(labelTest, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addComponent(btnReclamos)
+                .addGap(80, 80, 80))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(labelTest))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReclamos)))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel4);
+        jPanel4.setBounds(10, 420, 580, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -138,18 +185,38 @@ private void guardarSucursal(){
     private void VentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VentasActionPerformed
         int fila = tblTabla.getSelectedRow();
         if (fila >= 0){
-            if (modelo.getDatos()[fila] != null){
-                control.setSucursal(modelo.getDatos()[fila]);
-                new FrmVentas(null, true, control).setVisible(true);
-                cargarTabla();
-                tblTabla.clearSelection();
+            try {
+                if (modelo.getColaI().get(fila) != null){
+                    control.setSucursales(modelo.getColaI().get(fila));
+                    new FrmVentas(null, true, control).setVisible(true);
+                    cargarTabla();
+                    tblTabla.clearSelection();
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Ingrese un nombre a la sucursal", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (VacioException ex) {
+                Logger.getLogger(FrmSucursal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PosicionException ex) {
+                Logger.getLogger(FrmSucursal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else
-                JOptionPane.showMessageDialog(null, "Ingrese un nombre a la sucursal", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
             JOptionPane.showMessageDialog(null, "Seleccione una sucursal de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_VentasActionPerformed
+
+    private void btnReclamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReclamosActionPerformed
+        Timer timer = new Timer(2000, new ActionListener() {// 2000 milisegundos ,osea 2 segundos para que se ejecute la accion
+            // 3600000 milisegundos para 1 hora
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labelTest.setForeground(Color.red);
+                labelTest.setVisible(false);
+                
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }//GEN-LAST:event_btnReclamosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +245,8 @@ private void guardarSucursal(){
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -197,11 +266,14 @@ private void guardarSucursal(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ventas;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnReclamos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelTest;
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

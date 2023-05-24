@@ -4,7 +4,12 @@
  */
 package controlador;
 
+import controlador.ed.cola.Cola;
+import controlador.ed.cola.ColaI;
+import controlador.ed.lista.exception.exception.TopeException;
 import controlador.exception.EspacioException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.EnumMes;
 import modelo.Sucursal;
 import modelo.Venta;
@@ -14,103 +19,87 @@ import modelo.Venta;
  * @author Kevin
  */
 public class SucursalControl {
+    //private Sucursal[] sucursales;
+    private ColaI<Sucursal> cola = new ColaI<>(4);
+    private Sucursal sucursales;
+    private Venta venta;
 
-    private Sucursal[] sucursales;
-    private Sucursal sucursal;
-    private Venta ventas;
-
-    public SucursalControl() {
+    /*public SucursalControl() {
         sucursales = new Sucursal[4];
+    }*/
 
+    public ColaI<Sucursal> getColaI() {
+        return cola;
     }
 
-    /**
-     * @return the sucursal
-     */
-    public Sucursal getSucursal() {
-        if (sucursal == null) {
-            sucursal = new Sucursal();
+    public void setColaI(ColaI<Sucursal> cola) {
+        this.cola = cola;
+    }
+
+    public Sucursal getSucursales() {
+        if (sucursales == null) {
+            this.sucursales = new Sucursal();
         }
-        return sucursal;
-    }
-
-    /**
-     * @param sucursal the sucursal to set
-     */
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
-    }
-
-    /**
-     * @return the sucursales
-     */
-    public Sucursal[] getSucursales() {
         return sucursales;
     }
 
-    /**
-     * @param sucursales the sucursales to set
-     */
-    public void setSucursales(Sucursal[] sucursales) {
-        this.setSucursales(sucursales);
+    public void setSucursales(Sucursal sucursales) {
+        this.sucursales = sucursales;
     }
 
+    
     /**
      * @return the venta
      */
     public Venta getVenta() {
-        return ventas;
+        if (venta == null) {
+            this.venta = new Venta();
+        }
+        return venta;
     }
 
     /**
      * @param venta the venta to set
      */
     public void setVenta(Venta venta) {
-        this.ventas = venta;
+        this.venta = venta;
     }
 
     public boolean registrar() throws EspacioException {
-
-        int pos = -1;
-        int cont = -1;
-        for (Sucursal s : getSucursales()) {
-            cont++;
-            if (s == null) {
-                pos = cont;
-                break;
-            }
-
-        }
-
-        if (pos == -1) {
+        int pos = cola.size();//maximo de la cola, importante usar size y no gettope
+        if (pos >= 4) {
             throw new EspacioException();
         }
 
-        sucursal.setVentas(new Venta[EnumMes.values().length]);
+        sucursales.setVentas(new Venta[EnumMes.values().length]);
 
         for (int i = 0; i < EnumMes.values().length; i++) {
-            Venta venta = new Venta();
-            venta.setId(i + 1);
-            venta.setMes(EnumMes.values()[i]);
-            venta.setValor(0.0);
-            sucursal.getVentas()[i] = venta;
+            Venta v = new Venta();
+            v.setId(i + 1);
+            v.setMes(EnumMes.values()[i]);
+            v.setValor(0.0);
+            sucursales.getVentas()[i] = v;
         }
 
-        sucursales[pos] = sucursal;
+        try {
+            cola.queue(sucursales);
+        } catch (TopeException ex) {
+            Logger.getLogger(SucursalControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sucursales = null;
         return true;
     }
 
     public boolean guardarVentas(Integer posVenta, Double valor) throws EspacioException {
-        if (this.sucursal  !=null){
-        if (posVenta <= this.sucursal.getVentas().length - 1) {
-                sucursal.getVentas()[posVenta].setValor(valor);
-                
+        if (sucursales != null) {
+            if (posVenta >= 0 && posVenta < sucursales.getVentas().length) {
+                sucursales.getVentas()[posVenta].setValor(valor);
+                return true;
             } else {
                 throw new EspacioException();
             }
-        }else
-        throw new NullPointerException("Debe seleccionar una sucursal");
-
-        return true;
+        } else {
+            throw new NullPointerException("Debe seleccionar una sucursal");
+        }
     }
 }
