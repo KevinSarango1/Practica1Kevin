@@ -1,1 +1,427 @@
-{"modelo.Sucursal":{"id":1,"nombre":"Juan"}}
+{
+    "controlador.ed.lista.ListaEnlazada":{
+        "cabecera":{
+            "@class": "modelo.Sucursal",
+            "id": 1,
+            "nombre": "Sucursal Kevin",
+            "ventas": {
+                "cabecera": {
+                        "info":{
+                            "@class": "modelo.Venta",
+                            "id": 1,
+                            "valor": 10,
+                            "mes": "ENERO"
+                        },
+                        "sig": {
+                            "info": {
+                                "@class": "modelo.Venta",
+                                "id": 2,
+                                "valor": 20,
+                                "mes": "FEBRERO" 
+                            },
+                            "sig": {
+                                "info": {
+                                    "@class": "modelo.Venta",
+                                    "id": 3,
+                                    "valor": 30,
+                                    "mes": "MARZO" 
+                                },
+                                "sig": {
+                                    "info": {
+                                        "@class": "modelo.Venta",
+                                        "id": 4,
+                                        "valor": 40,
+                                        "mes": "ABRIL"
+                                    },
+                                    "sig": {
+                                        "info": {
+                                            "@class": "modelo.Venta",
+                                            "id": 5,
+                                            "valor": 50,
+                                            "mes": "MAYO"
+                                        },
+                                        "sig": {
+                                            "info": {
+                                                "@class": "modelo.Venta",
+                                                "id": 6,
+                                                "valor": 60,
+                                                "mes": "JUNIO"
+                                            },
+                                            "sig": {
+                                                "info": {
+                                                    "@class": "modelo.Venta",
+                                                    "id": 7,
+                                                    "valor": 70,
+                                                    "mes": "JULIO"
+                                               },
+                                               "sig": {
+                                                    "info": {
+                                                        "@class": "modelo.Venta",
+                                                        "id": 8,
+                                                        "valor": 80,
+                                                        "mes": "AGOSTO"
+                                                    },
+                                                    "sig": {
+                                                        "info": {
+                                                            "@class": "modelo.Venta",
+                                                            "id": 9,
+                                                            "valor": 90,
+                                                            "mes": "SEPTIEMBRE"
+                                                        },
+                                                        "sig": {
+                                                            "info": {
+                                                                "@class": "modelo.Venta",
+                                                                "id": 10,
+                                                                "valor": 100,
+                                                                "mes": "OCTUBRE"
+                                                            },
+                                                            "sig": {
+                                                                "info": {
+                                                                    "@class": "modelo.Venta",
+                                                                    "id": 11,
+                                                                    "valor": 110,
+                                                                    "mes": "NOVIEMBRE"
+                                                                },
+                                                                "sig": {
+                                                                    "info": {
+                                                                        "@class": "modelo.Venta",
+                                                                        "id": 12,
+                                                                        "valor": 120,
+                                                                        "mes": "DICIEMBRE"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                },
+                "size": 12
+            }
+        },
+        "sig": {
+            "info": {
+                "@class": "modelo.Sucursal",
+                "id": 2,
+            "nombre": "Sucursal Juan",
+            "ventas": {
+                "cabecera": {
+                        "info":{
+                            "@class": "modelo.Venta",
+                            "id": 1,
+                            "valor": 10,
+                            "mes": "ENERO"
+                        },
+                        "sig": {
+                            "info": {
+                                "@class": "modelo.Venta",
+                                "id": 2,
+                                "valor": 20,
+                                "mes": "FEBRERO" 
+                            },
+                            "sig": {
+                                "info": {
+                                    "@class": "modelo.Venta",
+                                    "id": 3,
+                                    "valor": 30,
+                                    "mes": "MARZO" 
+                                },
+                                "sig": {
+                                    "info": {
+                                        "@class": "modelo.Venta",
+                                        "id": 4,
+                                        "valor": 40,
+                                        "mes": "ABRIL"
+                                    },
+                                    "sig": {
+                                        "info": {
+                                            "@class": "modelo.Venta",
+                                            "id": 5,
+                                            "valor": 50,
+                                            "mes": "MAYO"
+                                        },
+                                        "sig": {
+                                            "info": {
+                                                "@class": "modelo.Venta",
+                                                "id": 6,
+                                                "valor": 60,
+                                                "mes": "JUNIO"
+                                            },
+                                            "sig": {
+                                                "info": {
+                                                    "@class": "modelo.Venta",
+                                                    "id": 7,
+                                                    "valor": 70,
+                                                    "mes": "JULIO"
+                                               },
+                                               "sig": {
+                                                    "info": {
+                                                        "@class": "modelo.Venta",
+                                                        "id": 8,
+                                                        "valor": 80,
+                                                        "mes": "AGOSTO"
+                                                    },
+                                                    "sig": {
+                                                        "info": {
+                                                            "@class": "modelo.Venta",
+                                                            "id": 9,
+                                                            "valor": 90,
+                                                            "mes": "SEPTIEMBRE"
+                                                        },
+                                                        "sig": {
+                                                            "info": {
+                                                                "@class": "modelo.Venta",
+                                                                "id": 10,
+                                                                "valor": 100,
+                                                                "mes": "OCTUBRE"
+                                                            },
+                                                            "sig": {
+                                                                "info": {
+                                                                    "@class": "modelo.Venta",
+                                                                    "id": 11,
+                                                                    "valor": 110,
+                                                                    "mes": "NOVIEMBRE"
+                                                                },
+                                                                "sig": {
+                                                                    "info": {
+                                                                        "@class": "modelo.Venta",
+                                                                        "id": 12,
+                                                                        "valor": 130,
+                                                                        "mes": "DICIEMBRE"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                },
+                "size": 12
+            }
+            },
+        "sig": {
+            "info": {
+                "@class": "modelo.Sucursal",
+                "id": 3,
+                "nombre": "Sucursal Jorge",
+                "ventas": {
+                "cabecera": {
+                        "info":{
+                            "@class": "modelo.Venta",
+                            "id": 1,
+                            "valor": 10,
+                            "mes": "ENERO"
+                        },
+                        "sig": {
+                            "info": {
+                                "@class": "modelo.Venta",
+                                "id": 2,
+                                "valor": 20,
+                                "mes": "FEBRERO" 
+                            },
+                            "sig": {
+                                "info": {
+                                    "@class": "modelo.Venta",
+                                    "id": 3,
+                                    "valor": 30,
+                                    "mes": "MARZO" 
+                                },
+                                "sig": {
+                                    "info": {
+                                        "@class": "modelo.Venta",
+                                        "id": 4,
+                                        "valor": 40,
+                                        "mes": "ABRIL"
+                                    },
+                                    "sig": {
+                                        "info": {
+                                            "@class": "modelo.Venta",
+                                            "id": 5,
+                                            "valor": 50,
+                                            "mes": "MAYO"
+                                        },
+                                        "sig": {
+                                            "info": {
+                                                "@class": "modelo.Venta",
+                                                "id": 6,
+                                                "valor": 60,
+                                                "mes": "JUNIO"
+                                            },
+                                            "sig": {
+                                                "info": {
+                                                    "@class": "modelo.Venta",
+                                                    "id": 7,
+                                                    "valor": 70,
+                                                    "mes": "JULIO"
+                                               },
+                                               "sig": {
+                                                    "info": {
+                                                        "@class": "modelo.Venta",
+                                                        "id": 8,
+                                                        "valor": 80,
+                                                        "mes": "AGOSTO"
+                                                    },
+                                                    "sig": {
+                                                        "info": {
+                                                            "@class": "modelo.Venta",
+                                                            "id": 9,
+                                                            "valor": 90,
+                                                            "mes": "SEPTIEMBRE"
+                                                        },
+                                                        "sig": {
+                                                            "info": {
+                                                                "@class": "modelo.Venta",
+                                                                "id": 10,
+                                                                "valor": 100,
+                                                                "mes": "OCTUBRE"
+                                                            },
+                                                            "sig": {
+                                                                "info": {
+                                                                    "@class": "modelo.Venta",
+                                                                    "id": 11,
+                                                                    "valor": 110,
+                                                                    "mes": "NOVIEMBRE"
+                                                                },
+                                                                "sig": {
+                                                                    "info": {
+                                                                        "@class": "modelo.Venta",
+                                                                        "id": 12,
+                                                                        "valor": 140,
+                                                                        "mes": "DICIEMBRE"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                },
+                "size": 12
+            }
+            },
+        "sig": {
+            "info": {
+            "@class": "modelo.Sucursal",
+            "id": 4,
+            "nombre": "Sucursal Andres",
+            "ventas": {
+                "cabecera": {
+                        "info":{
+                            "@class": "modelo.Venta",
+                            "id": 1,
+                            "valor": 10,
+                            "mes": "ENERO"
+                        },
+                        "sig": {
+                            "info": {
+                                "@class": "modelo.Venta",
+                                "id": 2,
+                                "valor": 20,
+                                "mes": "FEBRERO" 
+                            },
+                            "sig": {
+                                "info": {
+                                    "@class": "modelo.Venta",
+                                    "id": 3,
+                                    "valor": 30,
+                                    "mes": "MARZO" 
+                                },
+                                "sig": {
+                                    "info": {
+                                        "@class": "modelo.Venta",
+                                        "id": 4,
+                                        "valor": 40,
+                                        "mes": "ABRIL"
+                                    },
+                                    "sig": {
+                                        "info": {
+                                            "@class": "modelo.Venta",
+                                            "id": 5,
+                                            "valor": 50,
+                                            "mes": "MAYO"
+                                        },
+                                        "sig": {
+                                            "info": {
+                                                "@class": "modelo.Venta",
+                                                "id": 6,
+                                                "valor": 60,
+                                                "mes": "JUNIO"
+                                            },
+                                            "sig": {
+                                                "info": {
+                                                    "@class": "modelo.Venta",
+                                                    "id": 7,
+                                                    "valor": 70,
+                                                    "mes": "JULIO"
+                                               },
+                                               "sig": {
+                                                    "info": {
+                                                        "@class": "modelo.Venta",
+                                                        "id": 8,
+                                                        "valor": 80,
+                                                        "mes": "AGOSTO"
+                                                    },
+                                                    "sig": {
+                                                        "info": {
+                                                            "@class": "modelo.Venta",
+                                                            "id": 9,
+                                                            "valor": 90,
+                                                            "mes": "SEPTIEMBRE"
+                                                        },
+                                                        "sig": {
+                                                            "info": {
+                                                                "@class": "modelo.Venta",
+                                                                "id": 10,
+                                                                "valor": 100,
+                                                                "mes": "OCTUBRE"
+                                                            },
+                                                            "sig": {
+                                                                "info": {
+                                                                    "@class": "modelo.Venta",
+                                                                    "id": 11,
+                                                                    "valor": 110,
+                                                                    "mes": "NOVIEMBRE"
+                                                                },
+                                                                "sig": {
+                                                                    "info": {
+                                                                        "@class": "modelo.Venta",
+                                                                        "id": 12,
+                                                                        "valor": 150,
+                                                                        "mes": "DICIEMBRE"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                },
+                "size": 12
+               }
+             }
+           }
+         }
+       }
+    },
+    "size": 4
+}
